@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import ConnectPage from './pages/ConnectPage'
+import HomePage from './pages/HomePage'
+import DocsPage from './pages/DocsPage'
+import ProtectedRoute from './layouts/ProtectedRoute'
+import NotFoundPage from './pages/NotFoundPage'
+import RoomsPage from './pages/RoomsPage'
+import GamePage from './pages/GamePage'
+import SettingsPage from './pages/SettingsPage'
 
-export default App;
+
+// import App.css
+
+const App = () => (
+  <Router>
+    <main className='container content'>
+      <Routes>
+        <Route path='/connect' element={<ConnectPage />} />
+        <Route path='/docs' element={<DocsPage />} />
+        <Route path='/' element={<ConnectPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path='/rooms' element={<RoomsPage />} />
+          <Route path='/game' element={<GamePage />} />
+          <Route path='/settings' element={<SettingsPage />} />
+        </Route>
+
+        {/* match others routes */}
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+    </main>
+  </Router>
+)
+
+export default App

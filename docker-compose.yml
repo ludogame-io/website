@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  ludogame-website:
+    hostname: ludogame.website
+    build:
+      context: .
+      dockerfile: .DockerFile
+    ports:
+      - 3111:3111
+    volumes:
+      - .:/app
+    networks:
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=gateway
+      - traefik.http.routers.ludogame.service=ludogame-website
+      - traefik.http.routers.ludogame.rule=Host(`ludogame.io`)
+      - traefik.http.routers.ludogame.entrypoints=web,websecure
+      - traefik.http.routers.ludogame.tls.certresolver=w3i_ssl
+      - traefik.http.services.ludogame-website.loadbalancer.server.port=3111
+
+networks:
+  web:
+    external:
+      name: traefik_webgateway

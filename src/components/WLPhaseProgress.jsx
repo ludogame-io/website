@@ -7,7 +7,7 @@ const WLPhaseProgress = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      <Typography color="primary" variant='h6'>WL Phase 1</Typography>
+      <Typography color="primary" variant='h6'>WL Phase 1 countdown</Typography>
       <LinearProgress color="primary" sx={{ width: '100%' }} variant="determinate" value={value} />
       <Typography noWrap sx={{ display: 'flex', justifyContent: 'end', marginBottom: 2 }} color="primary" variant="body2">{total_pack - total_sold} Packs remaining...</Typography>
     </Box>
